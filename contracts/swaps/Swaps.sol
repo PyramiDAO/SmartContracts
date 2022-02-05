@@ -27,7 +27,7 @@ contract Swaps is ERC721, Ownable{
     IConstantFlowAgreementV1 private _cfa; // the stored constant flow agreement class address
 
     address public token;
-    mapping(uint => int96) public payerRequiredFlowRates;        //Required payments for each payer NFT
+    mapping(address => int96) public payerRequiredFlowRates;        //Required payments for each payer
 
     struct asset{
         uint amountUnderlyingExposed;
@@ -48,7 +48,8 @@ contract Swaps is ERC721, Ownable{
     function newSwap(address _receiver, address _payer, int96 _requiredFlowRate, uint _amountUnderlying) external{
         (, int96 initialFlowRate,,) = _cfa.getFlow(ISuperToken(token), _payer,_receiver);
         require(ISwapReceiver(_receiver).verifyNewSwap(msg.sender,_amountUnderlying), "This receiver did not permit you to issue this swap");
-        require(initialFlowRate >= _requiredFlowRate, "Not paying enough to initialize this swap");
+        require(initialFlowRate >= _requiredFlowRate + payerRequiredFlowRates[_payer], 
+            "Not paying enough to initialize this swap");
 
         _mintReceiver(_receiver,_amountUnderlying, msg.sender);         // note receiver will always have an even ID 0,2,4,ect.
         _mintPayer(_payer,_requiredFlowRate);                           // note payer will always have an odd ID 1,3,5,ect.
@@ -68,13 +69,8 @@ contract Swaps is ERC721, Ownable{
     }
     function _mintPayer(address _payer, int96 _requiredFlowRate) internal{
         _mint(_payer,index); 
-        _updatePayerRequiredFlowRates(index,_requiredFlowRate);         
+        payerRequiredFlowRates[_payer] = _requiredFlowRate;        
         index++;
-    }
-
-    function _updatePayerRequiredFlowRates(uint _index, int96 _requiredFlowRate) internal{
-        require(_index % 2 == 1, "Can only updated flow rates for payers");
-        payerRequiredFlowRates[_index] = _requiredFlowRate;
     }
 
     function _updateReceiverAssetsOwed(uint _index, asset memory a) internal{
