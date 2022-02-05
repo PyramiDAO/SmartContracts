@@ -46,13 +46,13 @@ abstract contract StrategyStandard is Ownable{
     function buySwap(uint256 _amountUnderlying) public virtual{
         require(underlyingInvested > underlyingExposedToSwaps + _amountUnderlying, "There's not enough free assets in this strategy to invest this amount"); 
         underlyingExposedToSwaps += _amountUnderlying;
-        _issueSwap(msg.sender);
+        _issueSwap(msg.sender, _amountUnderlying);
     }
 
     /**
     * @dev handles logic of issuing swap
      */
-    function _issueSwap(address _issueTo) internal{
+    function _issueSwap(address _issueTo, uint _amountUnderlying) internal{
         // issue NFT with supperfuild superapp
         // and send other end of NFT to treasury
     }
