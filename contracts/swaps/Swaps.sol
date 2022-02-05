@@ -5,20 +5,29 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 // initializing the CFA Library
-import {CFAv1Library} from "@superfluid-finance/ethereum-contracts/contracts/apps/CFAv1Library.sol";
+import {
+    IConstantFlowAgreementV1
+} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/IConstantFlowAgreementV1.sol";
+
+import {
+    ISuperfluid,
+    ISuperToken,
+    ISuperApp,
+    ISuperAgreement,
+    ContextDefinitions,
+    SuperAppDefinitions
+} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+
 import "../interfaces/ISwapReceiver.sol";
 
 contract Swaps is ERC721, Ownable{
 
-    using CFAv1Library for CFAv1Library.InitData;
-
     uint public index = 0;
 
-    //initialize cfaV1 variable
-    CFAv1Library.InitData public cfaV1;
+    IConstantFlowAgreementV1 private _cfa; // the stored constant flow agreement class address
 
     address public token;
-    mapping(uint => uint) public payerRequiredFlowRates;        //Required payments for each payer NFT
+    mapping(uint => int96) public payerRequiredFlowRates;        //Required payments for each payer NFT
 
     struct asset{
         uint amountUnderlyingExposed;
@@ -28,25 +37,16 @@ contract Swaps is ERC721, Ownable{
 
     mapping(uint => asset) public receiverAssetsOwed;
 
-    constructor(ISuperfluid host, address _token) Ownable() ERC721("Total Return Swap", "TRS"){
-        //initialize InitData struct, and set equal to cfaV1
-        cfaV1 = CFAv1Library.InitData(
-            host,
-            //here, we are deriving the address of the CFA using the host contract
-            IConstantFlowAgreementV1(
-                address(host.getAgreementClass(
-                        keccak256("org.superfluid-finance.agreements.ConstantFlowAgreement.v1")
-                    ))
-                )
-            );
+    constructor(IConstantFlowAgreementV1 cfa, address _token) Ownable() ERC721("Total Return Swap", "TRS"){
+        _cfa = cfa;
         token = _token;
     }
 
     event NewSwap(address _receiver, address _payer);
 
     /// @dev to be called by strategies. Anyone can make swaps. But it's the strategies that have the assets
-    function newSwap(address _receiver, address _payer, uint _requiredFlowRate, uint _amountUnderlying) external{
-        (, int96 initialFlowRate,,) = CFAv1Library.InitData.cfa.getFlow(token, _payer,_receiver);
+    function newSwap(address _receiver, address _payer, int96 _requiredFlowRate, uint _amountUnderlying) external{
+        (, int96 initialFlowRate,,) = _cfa.getFlow(ISuperToken(token), _payer,_receiver);
         require(ISwapReceiver(_receiver).verifyNewSwap(msg.sender,_amountUnderlying), "This receiver did not permit you to issue this swap");
         require(initialFlowRate >= _requiredFlowRate, "Not paying enough to initialize this swap");
 
@@ -66,13 +66,13 @@ contract Swaps is ERC721, Ownable{
         index++;
  
     }
-    function _mintPayer(address _payer, uint _requiredFlowRate) internal{
+    function _mintPayer(address _payer, int96 _requiredFlowRate) internal{
         _mint(_payer,index); 
         _updatePayerRequiredFlowRates(index,_requiredFlowRate);         
         index++;
     }
 
-    function _updatePayerRequiredFlowRates(uint _index, uint _requiredFlowRate) internal{
+    function _updatePayerRequiredFlowRates(uint _index, int96 _requiredFlowRate) internal{
         require(_index % 2 == 1, "Can only updated flow rates for payers");
         payerRequiredFlowRates[_index] = _requiredFlowRate;
     }

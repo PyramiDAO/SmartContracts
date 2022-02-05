@@ -1,0 +1,246 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_treasury",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_dex",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amountUnderlying",
+						"type": "uint256"
+					}
+				],
+				"name": "buySwap",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "dex",
+				"outputs": [
+					{
+						"internalType": "contract IUniswapV2Router02",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amountInvestment",
+						"type": "uint256"
+					}
+				],
+				"name": "fund",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amountToRemove",
+						"type": "uint256"
+					}
+				],
+				"name": "removeFunds",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "treasury",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "Caron Case (carsonpcase@gmail.com) contract to standardize what strategies do ",
+			"kind": "dev",
+			"methods": {
+				"buySwap(uint256)": {
+					"details": "function to buy swap on the strategy. Can only be done if it's free"
+				},
+				"fund(uint256)": {
+					"details": "fund function to provide funds to the strategy override to provide with the actual logic of the investment strategy"
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"removeFunds(uint256)": {
+					"details": "function for owner (treasury) to remove funds "
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"title": "ETHHODLStrategy",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/strategies/ETHHODLStrategy.sol": "ETHHODLStrategy"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0x24e0364e503a9bbde94c715d26573a76f14cd2a202d45f96f52134ab806b67b9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e12cbaa7378fd9b62280e4e1d164bedcb4399ce238f5f98fc0eefb7e50577981",
+				"dweb:/ipfs/QmXRoFGUgfsaRkoPT5bxNMtSayKTQ8GZATLPXf69HcRA51"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x61437cb513a887a1bbad006e7b1c8b414478427d33de47c5600af3c748f108da",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2c3d0973630ed74f2b5ce3944677a885dc70ec32fc83b35f55045a10224da32b",
+				"dweb:/ipfs/QmbefZ5RoEZKNHXCALfh683PnaNYzKPcKMFjyY1DVAgq8A"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"contracts/interfaces/IUniswapV2Router01.sol": {
+			"keccak256": "0x7d189e23c0505cc5b43e3f9b0cf09deaab57ac29228061db7c55fa5484c4286e",
+			"urls": [
+				"bzz-raw://d200dc87141b84c2de4e3cab880adc1cfe74f1f615059eed536fa928351fa6da",
+				"dweb:/ipfs/QmbRb9dv9pp2bMjgVxgsTX9p7zP2bMLaSp4vQNCSTkhXnC"
+			]
+		},
+		"contracts/interfaces/IUniswapV2Router02.sol": {
+			"keccak256": "0xb45e89fb2314353f3050c45cee0c98ce058760c109105047d391af970552739a",
+			"urls": [
+				"bzz-raw://ec1b7aac7c1420887f58ebda29a4659c66fead35771e171ad7e2ca6c89dc7884",
+				"dweb:/ipfs/QmSEF4jzHFUkeMiUxMKA6w5c9GiFRqx5EjndnL4L8tBSjm"
+			]
+		},
+		"contracts/strategies/ETHHODLStrategy.sol": {
+			"keccak256": "0xe25011e8939377faf28e767a980795b1a424a59bbae9525dc4a6972dcb7e0b7e",
+			"license": "None",
+			"urls": [
+				"bzz-raw://3ff21a96eee88c0a7f3e3342eb1f3a3dd40035dca0544da705c61486fd282d50",
+				"dweb:/ipfs/QmTEd7pXEGNhornSXina8dDGKnHpjFDEHMij2VQrhCo35h"
+			]
+		},
+		"contracts/strategies/StrategyStandard.sol": {
+			"keccak256": "0xd5e58961c14d464f10f8091c9afc5e8debbb2e00e36fe6f2931a7223bec8ec29",
+			"license": "None",
+			"urls": [
+				"bzz-raw://80ee688816fee8b016ce9e918bf6879ef018f048cb8e53a6fc4a94fdbc6d0465",
+				"dweb:/ipfs/QmRxBjnFMdqLAZtuW6K5KBSxSf2wCEN3ssxoK5wb2dRdYx"
+			]
+		}
+	},
+	"version": 1
+}
