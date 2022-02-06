@@ -8,6 +8,11 @@
 			{
 				"inputs": [
 					{
+						"internalType": "contract ISuperfluid",
+						"name": "host",
+						"type": "address"
+					},
+					{
 						"internalType": "contract IConstantFlowAgreementV1",
 						"name": "cfa",
 						"type": "address"
@@ -69,6 +74,38 @@
 					}
 				],
 				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "_id",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "int96",
+						"name": "_flowTerminated",
+						"type": "int96"
+					}
+				],
+				"name": "CaughtTermination",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"name": "Error",
 				"type": "event"
 			},
 			{
@@ -138,6 +175,162 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "_generateFlowId",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "id",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract ISuperToken",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "afterAgreementCreated",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract ISuperToken",
+						"name": "_superToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_agreementClass",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_agreementId",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_ctx",
+						"type": "bytes"
+					}
+				],
+				"name": "afterAgreementTerminated",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "newCtx",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract ISuperToken",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "afterAgreementUpdated",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "to",
 						"type": "address"
 					},
@@ -161,6 +354,155 @@
 					}
 				],
 				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract ISuperToken",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "beforeAgreementCreated",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract ISuperToken",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "beforeAgreementTerminated",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract ISuperToken",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "beforeAgreementUpdated",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_agreementId",
+						"type": "bytes32"
+					}
+				],
+				"name": "emergencySettle",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"name": "flowIDToReceiverNFT",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -308,36 +650,22 @@
 						"type": "uint256"
 					}
 				],
-				"name": "payerRequiredFlowRates",
+				"name": "receiverAssetsOwed",
 				"outputs": [
 					{
 						"internalType": "int96",
-						"name": "",
+						"name": "flowRateForAssets",
 						"type": "int96"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "receiverAssetsOwed",
-				"outputs": [
+					},
 					{
 						"internalType": "uint256",
 						"name": "amountUnderlyingExposed",
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "int256",
 						"name": "priceUSD",
-						"type": "uint256"
+						"type": "int256"
 					},
 					{
 						"internalType": "address",
@@ -425,13 +753,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "settleBalances",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "bytes4",
@@ -468,7 +789,7 @@
 				"name": "token",
 				"outputs": [
 					{
-						"internalType": "address",
+						"internalType": "contract ISuperToken",
 						"name": "",
 						"type": "address"
 					}
@@ -707,6 +1028,14 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
+		"@superfluid-finance/ethereum-contracts/contracts/apps/SuperAppBase.sol": {
+			"keccak256": "0x76db1497b95aa8af5c6b6d64222c5894c6f5e5662844b7287f0134cbbd0bb5c5",
+			"license": "AGPLv3",
+			"urls": [
+				"bzz-raw://d4a6716fa1bfbdc04a2b2481eb742691ac29b588118972cf81fdea8519a19ece",
+				"dweb:/ipfs/QmRpAuUqUdyihVYKBAcGqxeVEbF14URT9oQJYAc4wdkSX6"
+			]
+		},
 		"@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/IConstantFlowAgreementV1.sol": {
 			"keccak256": "0xd42f8c6825dc5088d78e0959cd44f1048dbc970563d7b8d18bae97fcfdc966a1",
 			"license": "AGPLv3",
@@ -795,19 +1124,26 @@
 				"dweb:/ipfs/QmNc58Ep6sYkSybGVAgmkeCjHFdBL2m1sGJGUgR99xKqeh"
 			]
 		},
-		"contracts/interfaces/ISwapReceiver.sol": {
-			"keccak256": "0xdf00a8ea60255637af0621087c4af8211cc30bff52b14a499114238d84325875",
+		"contracts/interfaces/IStrategy.sol": {
+			"keccak256": "0x758b92fe8f2a07380129019d29d49c5cd1e2c60d31b5f478cd13b5ecabcc4f0d",
 			"urls": [
-				"bzz-raw://ca8d49582e32c7e27cd1bbf51411b1419363d529d6bbea3124a99772678ef7ca",
-				"dweb:/ipfs/QmWWyvmyynyZjKjzWNSuPJneCGcgVdUW4J58JA9FJyKonb"
+				"bzz-raw://519b1975b0910dcc0e03c8263c71b779c040414f14be7409fb4f63c8b2d0eda4",
+				"dweb:/ipfs/QmVBzWv9gKdYHP45rE6E3Q4XKKLAKJ5wPVeguMZRHGEJur"
+			]
+		},
+		"contracts/interfaces/ISwapReceiver.sol": {
+			"keccak256": "0xf77df69b71399e3a2daa8224ff639d9a2c8cea83b1b978045d4afc70f8f11345",
+			"urls": [
+				"bzz-raw://6dfcc8a854f904e967ff7c156f402d2a626dd1c07c03bad3002a37de5d1c5d4a",
+				"dweb:/ipfs/QmbRjkoNv6Lfz428kSxHJnoGv6nFu3kPtGGE4g9BAnEM8F"
 			]
 		},
 		"contracts/swaps/Swaps.sol": {
-			"keccak256": "0xe88724e0b9f9d23087f9f3d791ef8b4f255dc9503d73491d4213955e9079b3a3",
+			"keccak256": "0x9eaa09e1c7dad8e77a3c0f87a925890132987e51e86b093da699312a349456cd",
 			"license": "None",
 			"urls": [
-				"bzz-raw://5ca31a97cbfec0d785c4fa291f5daecdc960a4127c16eda2fdee0ef0c3e9ce16",
-				"dweb:/ipfs/QmfUxYR19g7arfd3coDeCuGp52sjsJfZiXUNGyi3cWBeis"
+				"bzz-raw://2a34380f6afbdb8fbc2df0fa52c5563ccc49bf28f99e6a3dcd0dc55ccd79be6f",
+				"dweb:/ipfs/QmWJe8w2FcnMX2N6NcFfhGCTVgkaTxujvkC7bMXQmYaCn4"
 			]
 		}
 	},

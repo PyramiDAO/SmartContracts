@@ -1,0 +1,77 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amountInvestment",
+						"type": "uint256"
+					}
+				],
+				"name": "fund",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_underlyingAm",
+						"type": "uint256"
+					}
+				],
+				"name": "getPriceUnderlyingUSD",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "",
+						"type": "int256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/interfaces/IStrategy.sol": "IStrategy"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/IStrategy.sol": {
+			"keccak256": "0x758b92fe8f2a07380129019d29d49c5cd1e2c60d31b5f478cd13b5ecabcc4f0d",
+			"urls": [
+				"bzz-raw://519b1975b0910dcc0e03c8263c71b779c040414f14be7409fb4f63c8b2d0eda4",
+				"dweb:/ipfs/QmVBzWv9gKdYHP45rE6E3Q4XKKLAKJ5wPVeguMZRHGEJur"
+			]
+		}
+	},
+	"version": 1
+}

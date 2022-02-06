@@ -6,27 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_swaps",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "_treasury",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "_dex",
-						"type": "address"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -59,19 +38,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "dex",
-				"outputs": [
-					{
-						"internalType": "contract IUniswapV2Router02",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -82,25 +48,6 @@
 				"name": "fund",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_amountUnderlying",
-						"type": "uint256"
-					}
-				],
-				"name": "getFlowRate",
-				"outputs": [
-					{
-						"internalType": "int96",
-						"name": "",
-						"type": "int96"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -119,7 +66,7 @@
 						"type": "int256"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -153,19 +100,6 @@
 				"name": "renounceOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "swaps",
-				"outputs": [
-					{
-						"internalType": "contract ISwaps",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -219,23 +153,6 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "int256",
-						"name": "_new",
-						"type": "int256"
-					}
-				],
-				"name": "updatePriceE18",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"stateMutability": "payable",
-				"type": "receive"
 			}
 		],
 		"devdoc": {
@@ -261,7 +178,7 @@
 					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			},
-			"title": "ETHHODLStrategy",
+			"title": "StrategyStandard",
 			"version": 1
 		},
 		"userdoc": {
@@ -272,7 +189,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/strategies/ETHHODLStrategy.sol": "ETHHODLStrategy"
+			"contracts/strategies/StrategyStandard.sol": "StrategyStandard"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -308,28 +225,6 @@
 			"urls": [
 				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
 				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
-			]
-		},
-		"contracts/interfaces/IUniswapV2Router01.sol": {
-			"keccak256": "0x7d189e23c0505cc5b43e3f9b0cf09deaab57ac29228061db7c55fa5484c4286e",
-			"urls": [
-				"bzz-raw://d200dc87141b84c2de4e3cab880adc1cfe74f1f615059eed536fa928351fa6da",
-				"dweb:/ipfs/QmbRb9dv9pp2bMjgVxgsTX9p7zP2bMLaSp4vQNCSTkhXnC"
-			]
-		},
-		"contracts/interfaces/IUniswapV2Router02.sol": {
-			"keccak256": "0xb45e89fb2314353f3050c45cee0c98ce058760c109105047d391af970552739a",
-			"urls": [
-				"bzz-raw://ec1b7aac7c1420887f58ebda29a4659c66fead35771e171ad7e2ca6c89dc7884",
-				"dweb:/ipfs/QmSEF4jzHFUkeMiUxMKA6w5c9GiFRqx5EjndnL4L8tBSjm"
-			]
-		},
-		"contracts/strategies/ETHHODLStrategy.sol": {
-			"keccak256": "0x241b67e4309581a2dd377b35119eeca3cdedfb0556fa31cec25a51c30a841ba9",
-			"license": "None",
-			"urls": [
-				"bzz-raw://2b98bea5acb3367723bc11ddde3bfbdd687cc0ceaba01eac3920671b24f166bd",
-				"dweb:/ipfs/Qmcy84aCFu9q7wx6wkxc2tb3Bd5TK6Cqu9UZVckjsWy9WH"
 			]
 		},
 		"contracts/strategies/StrategyStandard.sol": {

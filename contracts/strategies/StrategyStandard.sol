@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 interface ITreasury{
-    function stableCoin() external returns(IERC20);
+    function stablecoin() external returns(IERC20);
 }
 
 /**
@@ -15,13 +15,17 @@ interface ITreasury{
 */
 abstract contract StrategyStandard is Ownable{
     address public immutable treasury;
-    address internal immutable stableCoin;
-    uint256 underlyingInvested;
-    uint256 underlyingExposedToSwaps;
+    address internal stablecoin;
+    uint256 public underlyingInvested;
+    uint256 public underlyingExposedToSwaps;
 
     constructor(address _treasury) Ownable(){
         treasury = _treasury;
-        stableCoin = address(ITreasury(_treasury).stableCoin());
+        stablecoin = address(ITreasury(_treasury).stablecoin());
+    }
+
+    function getPriceUnderlyingUSD(uint _underlyingAm) external virtual returns(int){
+        return(int(_underlyingAm));
     }
 
     /**
@@ -30,7 +34,7 @@ abstract contract StrategyStandard is Ownable{
      */
     function fund(uint256 _amountInvestment) public virtual onlyOwner{
         underlyingInvested += _amountInvestment;
-        IERC20(stableCoin).transferFrom(treasury, address(this), _amountInvestment);
+        IERC20(stablecoin).transferFrom(treasury, address(this), _amountInvestment);
     }   
 
     /**
@@ -52,7 +56,7 @@ abstract contract StrategyStandard is Ownable{
     /**
     * @dev handles logic of issuing swap
      */
-    function _issueSwap(address _issueTo, uint _amountUnderlying) internal{
+    function _issueSwap(address _issueTo, uint _amountUnderlying) internal virtual{
         // issue NFT with supperfuild superapp
         // and send other end of NFT to treasury
     }
