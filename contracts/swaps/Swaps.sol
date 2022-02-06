@@ -125,6 +125,8 @@ contract Swaps is ERC721, Ownable, SuperAppBase{
         ISwapReceiver(receiver).settle(settlement, ownerOf(receiverIndex+1));
 
         emit CaughtTermination(_agreementId, flowCancelled);
+        _burn(receiverIndex);
+        _burn(receiverIndex+1);
         return _ctx;
     }
 
@@ -148,6 +150,9 @@ contract Swaps is ERC721, Ownable, SuperAppBase{
         
         // payer index is always +1 receiver
         ISwapReceiver(receiver).settle(settlement, ownerOf(receiverIndex+1));
+
+        _burn(receiverIndex);
+        _burn(receiverIndex+1);
 
     }
 

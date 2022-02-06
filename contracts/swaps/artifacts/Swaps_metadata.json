@@ -1139,11 +1139,11 @@
 			]
 		},
 		"contracts/swaps/Swaps.sol": {
-			"keccak256": "0x9eaa09e1c7dad8e77a3c0f87a925890132987e51e86b093da699312a349456cd",
+			"keccak256": "0x5cd1ef783b8acdeba33d444a2d78f2c33f5915d57dea902e97bc38325213e0af",
 			"license": "None",
 			"urls": [
-				"bzz-raw://2a34380f6afbdb8fbc2df0fa52c5563ccc49bf28f99e6a3dcd0dc55ccd79be6f",
-				"dweb:/ipfs/QmWJe8w2FcnMX2N6NcFfhGCTVgkaTxujvkC7bMXQmYaCn4"
+				"bzz-raw://bf54e447200cbb660ae528291ca19fdee57b6a5461126a72fdc5f3c319ab1912",
+				"dweb:/ipfs/QmSxmzQnqtr1xqVdwe4ELLTNKNdGZko3ZBSPd25DxN5o1N"
 			]
 		}
 	},
