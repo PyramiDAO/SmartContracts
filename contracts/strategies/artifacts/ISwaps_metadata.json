@@ -100,11 +100,11 @@
 			]
 		},
 		"contracts/strategies/ETHHODLStrategy.sol": {
-			"keccak256": "0x241b67e4309581a2dd377b35119eeca3cdedfb0556fa31cec25a51c30a841ba9",
+			"keccak256": "0xbdb19be6611aba19d1c2962815ff700071a0361252a354610c81486cd3231b95",
 			"license": "None",
 			"urls": [
-				"bzz-raw://2b98bea5acb3367723bc11ddde3bfbdd687cc0ceaba01eac3920671b24f166bd",
-				"dweb:/ipfs/Qmcy84aCFu9q7wx6wkxc2tb3Bd5TK6Cqu9UZVckjsWy9WH"
+				"bzz-raw://483f57a7c3323fab50811806cf88fe20892a818a997db5ecf322e04c185f901b",
+				"dweb:/ipfs/QmSh8RMJtgM3XUNcfgbMVJmRbPk4MRfL3fKZXT7mkVEoG7"
 			]
 		},
 		"contracts/strategies/StrategyStandard.sol": {

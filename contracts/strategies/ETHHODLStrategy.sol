@@ -54,12 +54,12 @@ contract ETHHODLStrategy is StrategyStandard{
         dex.swapExactETHForTokens{value: _amountToRemove}(0, path, treasury, block.timestamp + 30);
     }
 
-    function getPriceUnderlyingUSD(uint _underlyingAm) external view override returns(int){
+    function getPriceUnderlyingUSD(uint _underlyingAm) public view override returns(int){
         return(int(_underlyingAm) * priceUSD);
     }
 
     function getFlowRate(uint _amountUnderlying) public view returns(int96){
-        return (int96(int(_amountUnderlying/secondsInYear)) * apr) / 100;
+        return (int96(getPriceUnderlyingUSD(_amountUnderlying/secondsInYear)) * apr) / 100;
     }
 
     function _issueSwap(address _issueTo, uint _amountUnderlying) internal override{
