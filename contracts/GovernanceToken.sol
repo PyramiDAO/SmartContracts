@@ -2,15 +2,49 @@
 pragma solidity ^0.8.2;
 
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract GovernanceToken is ERC20Votes {
-    uint256 public s_maxSupply = 1000000000000000000000000;
+contract GovernanceToken is ERC20Votes, Ownable {
+    
+    IERC20 public token;
+    uint public devShare = 12 ether;
 
-    constructor()
+    constructor(address _token)
         ERC20("GovernanceToken", "GT")
         ERC20Permit("GovernanceToken")
+        Ownable()
     {
-        _mint(msg.sender, s_maxSupply);
+        token = IERC20(_token);
+        _mint(msg.sender, devShare);
+    }
+
+    // Leave the bar. Claim back your TOKENs.
+    // Unlocks the staked + gained Token and burns xToken
+    function leave(uint256 _share) external {
+        // Gets the amount of xToken in existence
+        uint256 totalShares = totalSupply();
+        // Calculates the amount of Token the xToken is worth
+        uint256 what = (_share * token.balanceOf(address(this))) / (totalShares);
+        _burn(msg.sender, _share);
+        token.transfer(msg.sender, what);
+    }
+
+    // silly little function to be able to withdrawal your earnings while keeping the base amount.
+    // this only leaves with profits then gives you back enough shares to be equal to what you initial investment was
+    function withdrawal() external{
+        uint256 _share = token.balanceOf(msg.sender);
+        // Gets the amount of xToken in existence
+        uint256 totalShares = totalSupply();
+        // Calculates the amount of Token the xToken is worth
+        uint256 what = (_share * token.balanceOf(address(this))) / (totalShares);
+        if(what > _share){
+            token.transfer(msg.sender, what - _share);
+            _burn(msg.sender, (_share * totalShares) / token.balanceOf(address(this)));
+        }
+    }
+
+    function mint(address _to, uint256 _amount) external onlyOwner{
+        _mint(_to, _amount);
     }
 
     // The functions below are overrides required by Solidity.
